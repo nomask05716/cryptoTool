@@ -15,19 +15,23 @@
 #include "cryptoAlgorithm.h"
 #include "validInput.h"
 using namespace std;
-enum mainMenu{
-    encryptDecryptText =1,
-    encryptDecryptFile,
+
+enum mainMenu {
+    encryptDecryptText = 1,
+    encryptDecryptFile,  
 };
-enum subMenu{
-    caesar=1,
+
+enum subMenu {
+    caesar = 1,
     reverseAscii,
     atbashAscii,
 };
-enum choosingAction{
+
+enum choosingAction {
     encrypt = 1,
     decrypt,
 };
+
 string stringToBinary(const string& input) {
     string binary;
     for (unsigned char symbol : input) {
@@ -48,127 +52,144 @@ string binaryToString(const string& binary) {
     }
     return output;
 }
-int main(){
-    int choiceMainMenu,choiceSubMenu;
-    #ifdef _WIN32
-        SetConsoleOutputCP(CP_UTF8);
-        SetConsoleCP(CP_UTF8);
-    #else
-        setlocale(LC_ALL, "ru_RU.UTF-8");
-    #endif
-    choiceMainMenu = ValidInputMainMenu();
-    switch (choiceMainMenu)
-    {
-    case encryptDecryptText:{
-        choiceSubMenu = ValidInputSubMenu();
-        switch (choiceSubMenu)
-        {
-        case caesar:{
-            string inputText,input,output;
-            int shift = validInputKeyCaesar();
-            cin.ignore();
-            while (true){
-                cout << "Введите текст: ";
-                getline(cin, inputText);
-                if (!(inputText.empty())){
-                    break;
+
+int main() {
+    int choiceMainMenu, choiceSubMenu;
+    bool running = true; 
+
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+#else
+    setlocale(LC_ALL, "ru_RU.UTF-8");
+#endif
+
+    while (running) {  
+        choiceMainMenu = ValidInputMainMenu();
+
+        switch (choiceMainMenu) {
+            case encryptDecryptText: {
+                choiceSubMenu = ValidInputSubMenu();
+                switch (choiceSubMenu) {
+                    case caesar: {
+                        string inputText, input, output;
+                        int shift = validInputKeyCaesar();
+                        cin.ignore();
+                        while (true) {
+                            cout << "Введите текст: ";
+                            getline(cin, inputText);
+                            if (!(inputText.empty())) {
+                                break;
+                            }
+                        }
+                        int choice = ValidInputAction();
+                        switch (choice) {
+                            case encrypt: {
+                                output = caesarEncrypt(inputText, shift);
+                                output = stringToBinary(output);
+                                cout << "\nЗашифрованный текст: " << output << endl;
+                                break;
+                            }
+                            case decrypt: {
+                                input = binaryToString(inputText);
+                                output = caesarDecrypt(input, shift);
+                                cout << "Расшифрованный текст: " << output << endl;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case reverseAscii: {
+                        string inputText, output, shift = validInputKey();
+                        cin.ignore();
+                        while (true) {
+                            cout << "Введите текст: ";
+                            getline(cin, inputText);
+                            if (!(inputText.empty())) {
+                                break;
+                            }
+                        }
+                        int choice = ValidInputAction();
+                        switch (choice) {
+                            case encrypt: {
+                                output = reverseEncrypt(inputText, shift);
+                                cout << "\nЗашифрованный текст: " << output << endl;
+                                break;
+                            }
+                            case decrypt: {
+                                output = reverseDecrypt(inputText, shift);
+                                cout << "Расшифрованный текст: " << output << endl;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case atbashAscii: {
+                        string inputText, input, output;
+                        cin.ignore();
+                        while (true) {
+                            cout << "Введите текст: ";
+                            getline(cin, inputText);
+                            if (!(inputText.empty())) {
+                                break;
+                            }
+                        }
+                        int choice = ValidInputAction();
+                        switch (choice) {
+                            case encrypt: {
+                                output = atbashAll(inputText);
+                                output = stringToBinary(output);
+                                cout << "\nЗашифрованный текст: " << output << endl;
+                                break;
+                            }
+                            case decrypt: {
+                                input = binaryToString(inputText);
+                                output = atbashAll(input);
+                                cout << "Расшифрованный текст: " << output << endl;
+                                break;
+                            }
+                        }
+                        break;
+                    }
                 }
+                break;
             }
-            int choice = ValidInputAction();
-            switch (choice){
-                case encrypt:{
-                    output = caesarEncrypt(inputText,shift);
-                    output = stringToBinary(output);
-                    cout << "\nЗашифрованный текст: " << output << endl;
-                    break;
+            case encryptDecryptFile: {
+                choiceSubMenu = ValidInputSubMenu();
+                switch (choiceSubMenu) {
+                    case caesar: {
+                        int shift = validInputKeyCaesar(), choice = ValidInputAction();
+                        string pathFile = validInputPathFile();
+                        codeCaesar(pathFile, shift, choice);
+                        break;
+                    }
+                    case reverseAscii: {
+                        int choice = ValidInputAction();
+                        string pathFile = validInputPathFile(), shift = validInputKey();
+                        reverseAsciiFunct(pathFile, choice, shift);
+                        break;
+                    }
+                    case atbashAscii: {
+                        int choice = ValidInputAction();
+                        string pathFile = validInputPathFile();
+                        atbashAsciiFunct(pathFile, choice);
+                        break;
+                    }
                 }
-                case decrypt:{
-                    input = binaryToString(inputText);
-                    output = caesarDecrypt(input,shift);
-                    cout << "Расшифрованный текст: " << output << endl;
-                    break;
-                }
+                break;
             }
             
-            break;
         }
-        case reverseAscii:{
-            string inputText,output,shift = validInputKey();
-            while (true){
-                cout << "Введите текст: ";
-                getline(cin, inputText);
-                if (!(inputText.empty())){
-                    break;
-                }
-            }
-            int choice = ValidInputAction();
-            switch(choice){
-                case encrypt:{
-                    output = reverseEncrypt(inputText, shift);
-                    cout << "\nЗашифрованный текст: " << output << endl;
-                    break;
-                }
-                case decrypt:{
-                    output = reverseDecrypt(inputText, shift);
-                    cout << "Расшифрованный текст: " << output << endl;
-                    break;
-                }
-            }
-            break;
+        char continueChoice;
+        cout << "\nХотите продолжить? (y/n): ";
+        cin >> continueChoice;
+        cin.ignore(); 
+        if (continueChoice != 'y' && continueChoice != 'Y') {
+            running = false;
+            cout << "Выход из программы..." << endl;
         }
-        case atbashAscii:{
-            string inputText,input,output;
-            while (true){
-                cout << "Введите текст: ";
-                getline(cin, inputText);
-                if (!(inputText.empty())){
-                    break;
-                }
-            }
-            int choice = ValidInputAction();
-            switch (choice){
-                case encrypt:{
-                    output = atbashAll(inputText);
-                    output = stringToBinary(output);
-                    cout << "\nЗашифрованный текст: " << output << endl;
-                    break;
-                }
-                case decrypt:{
-                    input = binaryToString(inputText);
-                    output = atbashAll(input);
-                    cout << "Расшифрованный текст: " << output << endl;
-                    break;
-                }
-            }
-            break;
-        }
-        }
-        break;
+        
     }
-    case encryptDecryptFile:
-        choiceSubMenu = ValidInputSubMenu();
-        switch (choiceSubMenu)
-        {
-        case caesar:{
-            int shift = validInputKeyCaesar(),choice = ValidInputAction();
-            string pathFile = validInputPathFile();
-            codeCaesar(pathFile,shift,choice);
-            break;
-            }
-        case reverseAscii:{
-            int choice = ValidInputAction();
-            string pathFile = validInputPathFile(),shift = validInputKey();
-            reverseAsciiFunct(pathFile,choice,shift);
-            break;
-            }
-        case atbashAscii:{
-            int choice = ValidInputAction();
-            string pathFile = validInputPathFile();
-            atbashAsciiFunct(pathFile,choice);
-            break;
-            }
-        }
-        break;
-    }
+
     return 0;
 }

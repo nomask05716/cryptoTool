@@ -67,16 +67,28 @@ int ValidInputSubMenu()
     }
 }
 int validInputKeyCaesar() {
-    int input;
-    while (true) {
-        cout << "Введите ключ >> ";
-        cin >> input;
-        if (cin.fail()) {
-            cin.clear(); 
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
-            cerr << "Ошибка: введено не число. Попробуйте ещё раз." << endl;
-        } else {
-            return input; 
+    while (true)
+    {
+        try
+        {
+            cout << "Введите ключ >>";
+            string input;
+            getline(cin, input);
+            size_t pos = 0;
+            int key = stoi(input, &pos);
+            if (pos != input.length())
+            {
+                throw runtime_error("Ошибка: введите целое число без лишних символов.");
+            }
+            return key; 
+        }
+        catch (const invalid_argument &)
+        {
+            cout << "Ошибка: введено не число. Попробуйте ещё раз." << endl;
+        }
+        catch (const runtime_error &e)
+        {
+            cout << e.what() << endl;
         }
     }
 }
