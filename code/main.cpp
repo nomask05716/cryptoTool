@@ -38,6 +38,7 @@ string binaryToString(const string& binary) {
 }
 int main(){
     int choiceMainMenu,choiceSubMenu;
+    setlocale(LC_ALL,"ru");
     choiceMainMenu = ValidInputMainMenu();
     switch (choiceMainMenu)
     {
