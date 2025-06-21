@@ -68,7 +68,6 @@ int ValidInputSubMenu()
 }
 int validInputKeyCaesar() {
     int input;
-
     while (true) {
         cout << "Введите ключ >> ";
         cin >> input;

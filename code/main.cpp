@@ -1,5 +1,17 @@
 #include <iostream>
 #include <bitset>
+#include <clocale>
+#ifndef NOMINMAX
+    #define NOMINMAX
+#endif
+#ifndef WIN32_LEAN_AND_MEAN
+    #define WIN32_LEAN_AND_MEAN
+#endif
+
+#ifdef _WIN32
+    #include <windows.h>
+    #undef byte 
+#endif
 #include "cryptoAlgorithm.h"
 #include "validInput.h"
 using namespace std;
@@ -38,7 +50,12 @@ string binaryToString(const string& binary) {
 }
 int main(){
     int choiceMainMenu,choiceSubMenu;
-    setlocale(LC_ALL,"ru_RU.UTF-8");
+    #ifdef _WIN32
+        SetConsoleOutputCP(CP_UTF8);
+        SetConsoleCP(CP_UTF8);
+    #else
+        setlocale(LC_ALL, "ru_RU.UTF-8");
+    #endif
     choiceMainMenu = ValidInputMainMenu();
     switch (choiceMainMenu)
     {
