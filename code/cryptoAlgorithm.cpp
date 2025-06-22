@@ -10,7 +10,7 @@ void codeCaesar(string& inNameFile,int shift,int choice) {
     if (choice == 1) {
         ifstream infile(inNameFile,ios::binary);
         if (!infile){
-            cerr << "Файл не может открыться"<<endl;
+            //cerr << "Файл не может открыться"<<endl;
             return;
         }
         char symbol;

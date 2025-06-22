@@ -1,6 +1,7 @@
 #include <iostream>
 #include "validInput.h"
 #include <limits>
+#include <filesystem>
 using namespace std;
 int ValidInputMainMenu()
 {
@@ -133,10 +134,11 @@ string validInputPathFile()
                 }
                 
             }
-            if (input.empty()){
-                throw runtime_error("Ошибка. Путь не может быть пустым");
+            if (!(filesystem::exists(input))){
+                cerr << "Ошибка.Отсутствует файл по указанному пути" <<endl;
+            }else {
+                return input;
             }
-            return input;
         }
         catch (const runtime_error &e)
         {
