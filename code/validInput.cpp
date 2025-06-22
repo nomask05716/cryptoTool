@@ -115,9 +115,11 @@ string validInputKey() {
         getline(cin, input);
         if (input.empty()) {
             cerr << "Ошибка: ключ не может быть пустым. Попробуйте снова." << endl;
+        }else{
+            return input;
         }
-        return input;
     }
+    
 }
 string validInputPathFile()
 {

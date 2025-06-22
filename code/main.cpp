@@ -74,7 +74,6 @@ int main() {
                     case caesar: {
                         string inputText, input, output;
                         int shift = validInputKeyCaesar();
-                        cin.ignore();
                         while (true) {
                             cout << "Введите текст: ";
                             getline(cin, inputText);
@@ -101,7 +100,6 @@ int main() {
                     }
                     case reverseAscii: {
                         string inputText, output, shift = validInputKey();
-                        cin.ignore();
                         while (true) {
                             cout << "Введите текст: ";
                             getline(cin, inputText);
@@ -126,7 +124,6 @@ int main() {
                     }
                     case atbashAscii: {
                         string inputText, input, output;
-                        cin.ignore();
                         while (true) {
                             cout << "Введите текст: ";
                             getline(cin, inputText);
