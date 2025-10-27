@@ -85,7 +85,7 @@ int main() {
                             case encrypt: {
                                 output = caesarEncrypt(inputText, shift);
                                 output = stringToBinary(output);
-                                cout << "\nЗашифрованный текст: " << output << endl;
+                                cout << "Зашифрованный текст: " << output << endl;
                                 break;
                             }
                             case decrypt: {
@@ -110,7 +110,7 @@ int main() {
                         switch (choice) {
                             case encrypt: {
                                 output = reverseEncrypt(inputText, shift);
-                                cout << "\nЗашифрованный текст: " << output << endl;
+                                cout << "Зашифрованный текст: " << output << endl;
                                 break;
                             }
                             case decrypt: {
@@ -131,12 +131,12 @@ int main() {
                             }
                         }
                         int choice = ValidInputAction();
-                        output = atbashAll(inputText);
-    
                         if (choice == encrypt) {
-                            cout << "\nЗашифрованный текст: " << output << endl;
+                            output = atbashUniversal(inputText);
+                            cout << "Зашифрованный текст: " << output << endl;
                         } else {
-                        cout << "Расшифрованный текст: " << output << endl;
+                            output = atbashUniversal(inputText);
+                            cout << "Расшифрованный текст: " << output << endl;
                         }
                     break;
                     }
@@ -170,7 +170,7 @@ int main() {
             
         }
         char continueChoice;
-        cout << "\nХотите продолжить? (y/n): ";
+        cout << "Хотите продолжить? (y/n): ";
         cin >> continueChoice;
         cin.ignore(); 
         if (continueChoice != 'y' && continueChoice != 'Y') {

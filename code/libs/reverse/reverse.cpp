@@ -65,12 +65,10 @@ void reverseAsciiFunct(string& inNameFile, int choice, string& key) {
         outfile.write(encrypted.c_str(), encrypted.size());
         outfile.close();
         cout << "Успешно создан зашифрованный файл: " << NameFile << endl;
-        
     } else if (choice == 2) {
         string decrypted = reverseDecrypt(text, key);
         cout << "Название файла для расшифрованных данных (пример: Decrypted.bin): ";
         cin >> outNameFile;
-        
         ofstream outfile(outNameFile, ios::binary);
         if (!outfile) {
             cerr << "Ошибка: не удалось создать файл: " << outNameFile << endl;

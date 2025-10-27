@@ -28,12 +28,10 @@ void codeCaesar(string& inNameFile, int shift, int choice) {
     char byte;
     while (infile.get(byte)) text += byte;
     infile.close();
-    
     if (choice == 1) {
         string encrypted = caesarEncrypt(text, shift);
         cout << "Название файла для зашифрованных данных (пример: Encrypted.bin): ";
         cin >> NameFile;
-        
         ofstream outfile(NameFile, ios::binary);
         if (!outfile) {
             cerr << "Ошибка: не удалось создать файл: " << NameFile << endl;
@@ -47,7 +45,6 @@ void codeCaesar(string& inNameFile, int shift, int choice) {
         string decrypted = caesarDecrypt(text, shift);
         cout << "Название файла для расшифрованных данных (пример: Decrypted.bin): ";
         cin >> outNameFile;
-        
         ofstream outfile(outNameFile, ios::binary);
         if (!outfile) {
             cerr << "Ошибка: не удалось создать файл: " << outNameFile << endl;
