@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
-std::string atbashUniversal(const std::string& text);
-std::string atbashAll(const std::string& data);
-void atbashAsciiFunct(std::string& inNameFile, int choice);
+using namespace std;
+string atbashUniversal(const string& text);
+string atbashAll(const string& data);
+void atbashAsciiFunct(string& inNameFile, int choice);

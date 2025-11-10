@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-int ValidInputMainMenu();
-int ValidInputSubMenu();
+int validInputMainMenu();
+int validInputSubMenu();
 int validInputKeyCaesar();
-int ValidInputAction();
+int validInputAction();
 std::string validInputKey();
 std::string validInputPathFile();

@@ -2,9 +2,10 @@
 #include "validInput.h"
 #include <limits>
 #include <filesystem>
+#include "../../include/cryptoLibs.h"
 using namespace std;
 
-int ValidInputMainMenu()
+int validInputMainMenu()
 {
     while (true)
     {
@@ -36,7 +37,7 @@ int ValidInputMainMenu()
         }
     }
 }
-int ValidInputSubMenu()
+int validInputSubMenu()
 {
     while (true)
     {
@@ -94,7 +95,7 @@ int validInputKeyCaesar() {
         }
     }
 }
-int ValidInputAction() {
+int validInputAction() {
     int action;
     string input;
     while (true) {

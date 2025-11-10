@@ -12,7 +12,7 @@
     #include <windows.h>
     #undef byte 
 #endif
-#include "cryptoLibs.h"
+#include "../include/cryptoLibs.h"
 using namespace std;
 
 enum mainMenu {
@@ -64,11 +64,11 @@ int main() {
 #endif
 
     while (running) {  
-        choiceMainMenu = ValidInputMainMenu();
+        choiceMainMenu = validInputMainMenu();
 
         switch (choiceMainMenu) {
             case encryptDecryptText: {
-                choiceSubMenu = ValidInputSubMenu();
+                choiceSubMenu = validInputSubMenu();
                 switch (choiceSubMenu) {
                     case caesar: {
                         string inputText, input, output;
@@ -80,7 +80,7 @@ int main() {
                                 break;
                             }
                         }
-                        int choice = ValidInputAction();
+                        int choice = validInputAction();
                         switch (choice) {
                             case encrypt: {
                                 output = caesarEncrypt(inputText, shift);
@@ -106,7 +106,7 @@ int main() {
                                 break;
                             }
                         }
-                        int choice = ValidInputAction();
+                        int choice = validInputAction();
                         switch (choice) {
                             case encrypt: {
                                 output = reverseEncrypt(inputText, shift);
@@ -130,7 +130,7 @@ int main() {
                                 break;
                             }
                         }
-                        int choice = ValidInputAction();
+                        int choice = validInputAction();
                         if (choice == encrypt) {
                             output = atbashUniversal(inputText);
                             cout << "Зашифрованный текст: " << output << endl;
@@ -144,22 +144,22 @@ int main() {
                 break;
             }
             case encryptDecryptFile: {
-                choiceSubMenu = ValidInputSubMenu();
+                choiceSubMenu = validInputSubMenu();
                 switch (choiceSubMenu) {
                     case caesar: {
-                        int shift = validInputKeyCaesar(), choice = ValidInputAction();
+                        int shift = validInputKeyCaesar(), choice = validInputAction();
                         string pathFile = validInputPathFile();
                         codeCaesar(pathFile, shift, choice);
                         break;
                     }
                     case reverseAscii: {
-                        int choice = ValidInputAction();
+                        int choice = validInputAction();
                         string pathFile = validInputPathFile(), shift = validInputKey();
                         reverseAsciiFunct(pathFile, choice, shift);
                         break;
                     }
                     case atbashAscii: {
-                        int choice = ValidInputAction();
+                        int choice = validInputAction();
                         string pathFile = validInputPathFile();
                         atbashAsciiFunct(pathFile, choice);
                         break;
