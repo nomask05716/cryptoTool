@@ -11,10 +11,10 @@ string reverseEncrypt(const string& text, const string& key) {
     string result = "";
     int keyLen = key.size();
     
-    for (size_t i = 0; i < text.size(); ++i) {
+    for (size_t i = 0; i < text.size(); i++) {
         int shifted = (static_cast<unsigned char>(text[i]) + 
                       static_cast<unsigned char>(key[i % keyLen])) % 256;
-        
+        cout << "Байт исходного текста: "<<static_cast<unsigned char>(text[i]) <<" + байт ключа:"<<endl;
         string ascii = to_string(shifted);
         reverse(ascii.begin(), ascii.end());
         result += ascii;

@@ -6,7 +6,7 @@ using namespace std;
 
 string caesarEncrypt(const string& text, int shift) {
     string result = text;
-    for (size_t i = 0; i < result.size(); ++i) {
+    for (size_t i = 0; i < result.size(); i++) {
         result[i] = static_cast<unsigned char>((static_cast<unsigned char>(result[i]) + shift) % 256);
     }
     return result;
