@@ -37,16 +37,20 @@ string atbashAll(const string& data) {
     return result;
 }
 void atbashAsciiFunct(string& inNameFile, int choice) {
-    string data, NameFile, outNameFile;
+    string text, NameFile, outNameFile;
     ifstream infile(inNameFile, ios::binary);
     if (!infile) {
         cerr << "Ошибка: не удалось открыть файл: " << inNameFile << endl;
         return;
     }
     char byte;
-    while (infile.get(byte)) data += byte;
+    while (infile.get(byte)) {
+        if (byte != '\n' && byte != '\r') {  
+            text += byte;
+        }
+    }
     infile.close();
-    string result = atbashAll(data);
+    string result = atbashAll(text);
     if (choice == 1) {
         cout << "Введите название файла для зашифрованных данных: ";
         cin >> NameFile;

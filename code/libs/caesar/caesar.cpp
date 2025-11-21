@@ -27,6 +27,9 @@ void codeCaesar(string& inNameFile, int shift, int choice) {
     }
     char byte;
     while (infile.get(byte)) text += byte;
+    if (!text.empty() && text.back() == '\n') {
+        text.pop_back();
+    }
     infile.close();
     if (choice == 1) {
         string encrypted = caesarEncrypt(text, shift);

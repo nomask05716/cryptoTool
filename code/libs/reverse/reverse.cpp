@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <sstream>
 #include "reverse.h"
+#include <limits>
 using namespace std;
 
 string reverseEncrypt(const string& text, const string& key) {
@@ -50,13 +51,14 @@ void reverseAsciiFunct(string& inNameFile, int choice, string& key) {
     
     char byte;
     while (infile.get(byte)) text += byte;
+    if (!text.empty() && text.back() == '\n') {
+        text.pop_back();
+    }
     infile.close();
-    
     if (choice == 1) {
         string encrypted = reverseEncrypt(text, key);
         cout << "Название файла для зашифрованных данных (пример: Encrypted.bin): ";
-        cin >> NameFile;
-        
+        getline(cin, NameFile);
         ofstream outfile(NameFile, ios::binary);
         if (!outfile) {
             cerr << "Ошибка: не удалось создать файл: " << NameFile << endl;
@@ -68,7 +70,7 @@ void reverseAsciiFunct(string& inNameFile, int choice, string& key) {
     } else if (choice == 2) {
         string decrypted = reverseDecrypt(text, key);
         cout << "Название файла для расшифрованных данных (пример: Decrypted.bin): ";
-        cin >> outNameFile;
+        getline(cin, outNameFile);
         ofstream outfile(outNameFile, ios::binary);
         if (!outfile) {
             cerr << "Ошибка: не удалось создать файл: " << outNameFile << endl;
