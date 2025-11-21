@@ -14,10 +14,11 @@ string reverseEncrypt(const string& text, const string& key) {
     for (size_t i = 0; i < text.size(); i++) {
         int shifted = (static_cast<unsigned char>(text[i]) + 
                       static_cast<unsigned char>(key[i % keyLen])) % 256;
-        cout << "Байт исходного текста: "<<static_cast<unsigned char>(text[i]) <<" + байт ключа:"<<endl;
+        cout << "Байт исходного текста: "<<static_cast<unsigned char>(text[i]) <<" + байт ключа:"<< static_cast<unsigned char>(key[i % keyLen])<<endl;
         string ascii = to_string(shifted);
         reverse(ascii.begin(), ascii.end());
         result += ascii;
+        cout <<"Переворачиваем байт шифротекста: " <<endl;
         if (i != text.size() - 1) {
             result += " ";
         }
